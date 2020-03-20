@@ -138,6 +138,7 @@
 				packet[entity] = data;
 				socket.send(JSON.stringify(packet));
 			}
+
 			var counter = 0;
 			function addEntityWithoutName(data) {
 				var name = "X" + (counter++ % 100);
@@ -275,8 +276,8 @@
 						// XXX: TODO What are you going to do here?
 						// Update the world with the received message
 						let data = JSON.parse(msg.data);
-						for (entity in msg) {
-							world[entity] = msg[entity];
+						for (let entity in data) {
+							world[entity] = data[entity];
 							drawNextFrame();
 						}
 					} catch (e) {

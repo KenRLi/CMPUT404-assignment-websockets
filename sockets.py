@@ -12,7 +12,7 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-#
+
 import flask
 from flask import Flask, request, redirect, url_for
 from flask_sockets import Sockets
@@ -97,7 +97,7 @@ def hello():
     '''Return something coherent here.. perhaps redirect to /static/index.html '''
     return redirect(url_for('static', filename='index.html'), 301)
 
-def read_ws(ws,client):
+def read_ws(ws, client):
     '''A greenlet function that reads from the websocket and updates the world'''
     # XXX: TODO IMPLEMENT ME
     # From chat.py Example
@@ -106,7 +106,7 @@ def read_ws(ws,client):
             msg = ws.receive()
             if (msg is not None):
                 packet = json.loads(msg)
-                send_all_json( packet )
+                send_all_json(packet)
             else:
                 break
     except:
@@ -146,7 +146,7 @@ def flask_post_json():
 @app.route("/entity/<entity>", methods=['POST','PUT'])
 def update(entity):
     '''update the entities via this interface'''
-    data = flask_post_json
+    data = flask_post_json()
     if (request.method == 'POST'):
         for key, value in data.items():
             myWorld.update(entity, key, value)
